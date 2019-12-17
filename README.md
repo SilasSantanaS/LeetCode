@@ -1,2 +1,2 @@
 # LeetCode
-solving algorithms problems mostly in Python
+Solving algorithms problems mostly in Python
