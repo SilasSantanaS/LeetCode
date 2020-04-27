@@ -20,36 +20,22 @@
     return answer'''
 
 
-def convertRoman(half, numbersDictionary):
-    print("half: {}".format(half))
-
-    if len(half) <= 2:  # base case
-        if len(half) == 2:
-            if numbersDictionary.get(half[len(half) - 1]) <= numbersDictionary.get(half[len(half) - 2]):
-                return numbersDictionary.get(half[len(half) - 1]) + numbersDictionary.get(half[len(half) - 2])
-            else:
-                return numbersDictionary.get(half[len(half) - 2]) - numbersDictionary.get(half[len(half) - 1])
-        else:
-            print("kkkk: {}".format(numbersDictionary.get(half)))
-            return 0
-    else:
-        return convertRoman(half[:len(half) / 2], numbersDictionary) + convertRoman(half[len(half) / 2:], numbersDictionary)
-
-
-def romanToInt():
+def romanToInt(s):
     numbersDictionary = {"I": 1, "V": 5, "X": 10,
-                         "L": 50, "C": 100, "D": 500, "M": 1000}
+                         "L": 50, "C": 100, "D": 500, "M": 1000, "Z": 0}
 
-    s = "X"
-    answer = 0
+    if len(s) > 2:
+        return romanToInt(s[:len(s) / 2]) + romanToInt(s[len(s) / 2:])
+    if len(s) == 1:
+        s += "Z"
 
-    return answer + convertRoman(s[:len(s) / 2], numbersDictionary) + convertRoman(s[len(s) / 2:], numbersDictionary)
+    if numbersDictionary.get(s[0]) >= numbersDictionary.get(s[1]):
+        return numbersDictionary.get(s[0]) + numbersDictionary.get(s[1])
+    return numbersDictionary.get(s[1]) - numbersDictionary.get(s[0])
 
 
-# print(romanToInt())
+print(romanToInt("MCDLXXVI"))
 
-name = "silas"
 
 # print(name[:len(name) / 2])
 # print(name[len(name) / 2:])
-print("answer: {}".format(romanToInt()))
